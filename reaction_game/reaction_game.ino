@@ -37,33 +37,37 @@ void beep(int duration) {
   digitalWrite(buzzer, LOW);
 }
 
-void countdownLED(int pin, int waitTime) {
+bool countdownLED(int pin, int waitTime) {
   digitalWrite(pin, HIGH);
   beep(100);
   
   unsigned long start = millis();
   while (millis() - start < waitTime) {
     if (digitalRead(lbutton) == 0 || digitalRead(rbutton) == 0) {
-      // false start
-      digitalWrite(pin, LOW);
+      for (int i = 0; i < 5; i++) {
+        digitalWrite(pin, HIGH);
+        delay(100);
+        digitalWrite(pin, LOW);
+        delay(100);
+      }
       beep(100);
       delay(200);
       beep(100);
       delay(200);
       beep(100);
       delay(1000);
-      return;
+      return false;
     }
   }
-  
   digitalWrite(pin, LOW);
+  return true;
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-  countdownLED(redLED, 1000);
-  countdownLED(yellowLED, 1000);
-  countdownLED(greenLED, random(1000, 5000));
+  if (!countdownLED(redLED, 1000)) return;
+  if (!countdownLED(yellowLED, 1000)) return;
+  if (!countdownLED(greenLED, random(1000, 5000))) return;
 
   digitalWrite(lwhiteLED, HIGH);
   digitalWrite(rwhiteLED, HIGH);
