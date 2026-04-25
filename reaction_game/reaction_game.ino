@@ -36,22 +36,18 @@ void beep() {
   digitalWrite(buzzer, LOW);
 }
 
+void countdownLED(int pin, int waitTime) {
+  digitalWrite(pin, HIGH);
+  beep();
+  delay(waitTime);
+  digitalWrite(pin, LOW);
+}
+
 void loop() {
   // put your main code here, to run repeatedly:
-  digitalWrite(redLED, HIGH);
-  beep();
-  delay(1000);
-  digitalWrite(redLED, LOW);
-
-  digitalWrite(yellowLED, HIGH);
-  beep();
-  delay(1000);
-  digitalWrite(yellowLED, LOW);
-
-  digitalWrite(greenLED, HIGH);
-  beep();
-  delay(random(1000, 5000));
-  digitalWrite(greenLED, LOW);
+  countdownLED(redLED, 1000);
+  countdownLED(yellowLED, 1000);
+  countdownLED(greenLED, random(1000, 5000));
 
   digitalWrite(lwhiteLED, HIGH);
   digitalWrite(rwhiteLED, HIGH);
