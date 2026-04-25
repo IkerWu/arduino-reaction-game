@@ -14,6 +14,7 @@ int buttonPressed = 0;
 
 void setup() {
   // put your setup code here, to run once:
+
   pinMode(greenLED, OUTPUT);
   pinMode(yellowLED, OUTPUT);
   pinMode(redLED, OUTPUT);
@@ -27,7 +28,7 @@ void setup() {
   pinMode(rbutton, INPUT_PULLUP);
 
   randomSeed(analogRead(0));
-
+  Serial.begin(9600);
 }
 
 void beep(int duration) {
@@ -39,7 +40,22 @@ void beep(int duration) {
 void countdownLED(int pin, int waitTime) {
   digitalWrite(pin, HIGH);
   beep(100);
-  delay(waitTime);
+  
+  unsigned long start = millis();
+  while (millis() - start < waitTime) {
+    if (digitalRead(lbutton) == 0 || digitalRead(rbutton) == 0) {
+      // false start
+      digitalWrite(pin, LOW);
+      beep(100);
+      delay(200);
+      beep(100);
+      delay(200);
+      beep(100);
+      delay(1000);
+      return;
+    }
+  }
+  
   digitalWrite(pin, LOW);
 }
 
