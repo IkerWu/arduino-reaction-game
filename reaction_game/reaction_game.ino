@@ -65,11 +65,12 @@ void loop() {
   if (!countdownLED(yellowLED, 1000)) return;
   if (!countdownLED(greenLED, random(1000, 5000))) return;
 
+  unsigned long reactionStart = millis();
+
   digitalWrite(lwhiteLED, HIGH);
   digitalWrite(rwhiteLED, HIGH);
 
-  while(buttonPressed == 0){
-  
+  while(buttonPressed == 0){ 
     if(digitalRead(lbutton)==0){
       buttonPressed = 1;
       digitalWrite(rwhiteLED, LOW);
@@ -79,7 +80,12 @@ void loop() {
       digitalWrite(lwhiteLED, LOW);
     }
   }
-  
+
+  unsigned long reactionTime = millis() - reactionStart;
+  Serial.print("Reaction time: ");
+  Serial.print(reactionTime);
+  Serial.println(" ms");
+
   beep(300);
   delay(2000);
   digitalWrite(lwhiteLED, LOW);
