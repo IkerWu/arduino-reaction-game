@@ -30,15 +30,15 @@ void setup() {
 
 }
 
-void beep() {
+void beep(int duration) {
   digitalWrite(buzzer, HIGH);
-  delay(100);
+  delay(duration);
   digitalWrite(buzzer, LOW);
 }
 
 void countdownLED(int pin, int waitTime) {
   digitalWrite(pin, HIGH);
-  beep();
+  beep(100);
   delay(waitTime);
   digitalWrite(pin, LOW);
 }
@@ -63,10 +63,8 @@ void loop() {
       digitalWrite(lwhiteLED, LOW);
     }
   }
-
-  digitalWrite(buzzer, HIGH);
-  delay(300);
-  digitalWrite(buzzer, LOW);
+  
+  beep(300);
   delay(2000);
   digitalWrite(lwhiteLED, LOW);
   digitalWrite(rwhiteLED, LOW);
