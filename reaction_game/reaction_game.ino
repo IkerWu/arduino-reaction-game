@@ -46,15 +46,11 @@ bool countdownLED(int pin, int waitTime) {
     if (digitalRead(lbutton) == 0 || digitalRead(rbutton) == 0) {
       for (int i = 0; i < 5; i++) {
         digitalWrite(pin, HIGH);
+        beep(100);
         delay(100);
         digitalWrite(pin, LOW);
         delay(100);
       }
-      beep(100);
-      delay(200);
-      beep(100);
-      delay(200);
-      beep(100);
       delay(1000);
       return false;
     }
