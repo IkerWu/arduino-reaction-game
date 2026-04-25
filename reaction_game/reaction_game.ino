@@ -30,26 +30,26 @@ void setup() {
 
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  digitalWrite(redLED, HIGH);
+void beep() {
   digitalWrite(buzzer, HIGH);
   delay(100);
   digitalWrite(buzzer, LOW);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  digitalWrite(redLED, HIGH);
+  beep();
   delay(1000);
   digitalWrite(redLED, LOW);
 
   digitalWrite(yellowLED, HIGH);
-  digitalWrite(buzzer, HIGH);
-  delay(100);
-  digitalWrite(buzzer, LOW);
+  beep();
   delay(1000);
   digitalWrite(yellowLED, LOW);
 
   digitalWrite(greenLED, HIGH);
-  digitalWrite(buzzer, HIGH);
-  delay(100);
-  digitalWrite(buzzer, LOW);
+  beep();
   delay(random(1000, 5000));
   digitalWrite(greenLED, LOW);
 
